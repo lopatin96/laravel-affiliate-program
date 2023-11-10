@@ -1,0 +1,30 @@
+{
+  "name": "lopatin96/laravel-affiliate-program",
+  "description": "Laravel affiliate program",
+  "autoload": {
+    "psr-4": {
+      "Atin\\LaravelAffiliateProgram\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Atin\\LaravelAffiliateProgram\\AffiliateProgramProvider"
+      ]
+    }
+  },
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vladyslav Lopatin",
+      "email": "ilopatin3@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.1"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^8.0"
+  }
+}
