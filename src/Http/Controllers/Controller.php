@@ -1,6 +1,6 @@
 <?php
 
-namespace Atin\LaravelSocialAuth\Http\Controllers;
+namespace Atin\LaravelAffiliateProgram\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
