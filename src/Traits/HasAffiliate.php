@@ -20,6 +20,6 @@ trait HasAffiliate
 
     protected function getAffiliateUrlAttribute(): string
     {
-        return config('app.url') . '/aff_id=' . auth()->id();
+        return config('app.url') . '/?aff_id=' . auth()->id();
     }
 }
