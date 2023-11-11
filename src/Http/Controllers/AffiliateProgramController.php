@@ -8,6 +8,10 @@ class AffiliateProgramController extends Controller
 {
     public function index()
     {
-        return view('laravel-affiliate-program::index');
+        return view('laravel-affiliate-program::index', [
+            'balance' => 0.0,
+            'commissions' => [],
+            'payouts' => [],
+        ]);
     }
 }
