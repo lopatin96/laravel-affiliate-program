@@ -50,7 +50,7 @@
 
                             <x-laravel-affiliate-program::balance :balance="$balance" />
 
-                            <x-laravel-affiliate-program::payouts />
+                            <x-laravel-affiliate-program::payouts :payouts="$payouts" />
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ return [
     "info-text" => "
         <p>Just a few steps separate you from making money:</p>
 
-        <ol class='list-decimal list-inside mt-2'>
+        <ol class='list-disc list-inside mt-2'>
             <li><span class='font-bold'>Share your link.</span> Recommend FlexLink to your audience.</li>
             <li><span class='font-bold'>Monitor your conversions.</span> A simple dashboard shows how much you earn.</li>
             <li><span class='font-bold'>Issue an invoice and receive money.</span> We send payouts via PayPal.</li>
@@ -34,5 +34,12 @@ return [
 
     "payouts-title" => "Payouts",
     "payouts-no-payouts" => "You don’t have any payouts yet",
+
+    "User" => "User",
+    "Date" => "Date",
+    "Payment" => "Payment",
+    "Commission" => "Commission",
+    "To payout" => "To payout",
+    "Amount" => "Amount",
 
 ];

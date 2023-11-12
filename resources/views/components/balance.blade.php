@@ -7,7 +7,7 @@
         <div class="bg-white sm:rounded-lg shadow-sm">
             <div class="p-6">
                 <div class="mt-2 text-xl font-semibold text-gray-700">
-                    ${{ number_format($balance, 2) }}
+                    @money($balance)
                 </div>
                 <div class="max-w-2xl text-sm text-gray-600">
                     {{ __('laravel-affiliate-program::affiliate-program.balance-text') }}

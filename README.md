@@ -18,15 +18,20 @@ protected $middleware = [
 ```
 
 ### Listeners
-Add ```AffiliateProgram``` to ```app/Providers/EventServiceProvider.php```:
+Add ```SaveAffiliateId``` and ```SparkAffiliateSubscriptionUpdate``` to ```app/Providers/EventServiceProvider.php```:
 
 ```php
 use Atin\LaravelAffiliateProgram\Listeners\SaveAffiliateId;
+use Atin\LaravelAffiliateProgram\Listeners\SparkAffiliateSubscriptionUpdate;
 …
 protected $listen = [
     Registered::class => [
         SaveAffiliateId::class,
     ],
+];
+
+protected $subscribe = [
+    SparkAffiliateSubscriptionUpdate::class,
 ];
 ```
 

@@ -13,7 +13,7 @@ return [
     "info-text" => "
         <p>Всего несколько шагов отделяют вас от заработка:</p>
 
-        <ol class='list-decimal list-inside mt-2'>
+        <ol class='list-disc list-inside mt-2'>
             <li><span class='font-bold'>Поделитесь своей ссылкой.</span> Порекомендуйте FlexLink своей аудитории.</li>
             <li><span class='font-bold'>Следите за своими конверсиями.</span> Простая информационная панель показывает, сколько вы зарабатываете.</li>
             <li><span class='font-bold'>Выставьте счет-фактуру и получите деньги.</span> Мы осуществляем выплаты через PayPal.</li>
@@ -34,5 +34,12 @@ return [
 
     "payouts-title" => "Выплаты",
     "payouts-no-payouts" => "У вас пока нет выплат",
+
+    "User" => "Пользователь",
+    "Date" => "Дата",
+    "Payment" => "Платеж",
+    "Commission" => "Комиссия",
+    "To payout" => "К выплате",
+    "Amount" => "Сумма",
 
 ];
