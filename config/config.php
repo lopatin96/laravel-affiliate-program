@@ -8,7 +8,7 @@ return [
 
     'vat_percent' => 20,
 
-    'freeze_commissions_in_days' => 0,
+    'freeze_commissions_in_days' => 31,
 
     'payouts_start_at' => 10,
 

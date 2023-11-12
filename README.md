@@ -1,9 +1,9 @@
 # Install
 
-Before install composer, create a ```resources/markdown/affiliate-program-terms.md``` file in you project (see **Terms** section belowe).
+Before install composer, create a ```resources/markdown/affiliate-terms.md``` file in you project (see **Terms** section belowe).
 
 ### Terms
-Create a ```resources/markdown/affiliate-program-terms.md``` file with Terms of Service.
+Create a ```resources/markdown/affiliate-terms.md``` file with Terms of Service.
 
 ### Migrations
 Run a migration ```php artisan migrate```

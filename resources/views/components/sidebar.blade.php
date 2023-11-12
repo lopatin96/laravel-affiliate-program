@@ -20,7 +20,7 @@
     {{ __('laravel-affiliate-program::affiliate-program.sidebar-text') }}
 </div>
 <div class="mt-12">
-    <a href="/affiliate-program/terms-of-use" target="_blank" class="text-gray-600 underline">
+    <a href="/affiliate-terms" target="_blank" class="text-gray-600 underline">
         {{ __('laravel-affiliate-program::affiliate-program.Terms of Use') }}
     </a>
 </div>

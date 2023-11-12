@@ -2,6 +2,7 @@
 
 namespace Atin\LaravelAffiliateProgram;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AffiliateProgramProvider extends ServiceProvider
@@ -13,6 +14,10 @@ class AffiliateProgramProvider extends ServiceProvider
 
     public function boot()
     {
+        Blade::directive('money', static function ($amount) {
+            return "<?php echo '$' . number_format($amount / 100, 2); ?>";
+        });
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');

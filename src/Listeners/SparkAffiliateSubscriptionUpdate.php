@@ -17,11 +17,25 @@ class SparkAffiliateSubscriptionUpdate
             AffiliateCommission::create([
                 'user_id' => $affiliate->id,
                 'subscription_user_id' => $event->subscription->user_id,
-                'payment' => 12500,
-                'commission' => 10000,
+                'payment' => $this->getPriceInCents($event->subscription->stripe_price),
                 'revenue_percent' => config('laravel-affiliate-program.revenue_percent'),
             ]);
         }
+    }
+
+    private function getPriceInCents(string $stripePrice): int
+    {
+        foreach (config('spark.billables.user.plans') as $plan) {
+            if ($plan['monthly_id'] === $stripePrice) {
+                return (float) $plan['monthly_price'] * 100; // usd to cents
+            }
+
+            if ($plan['yearly_id'] === $stripePrice) {
+                return (float) $plan['monthly_price'] * 100 * 10; // usd to cents and 10 months
+            }
+        }
+
+        return -1;
     }
 
     public function subscribe($events)
