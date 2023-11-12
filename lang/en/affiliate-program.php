@@ -18,14 +18,16 @@ return [
             <li><span class='font-bold'>Monitor your conversions.</span> A simple dashboard shows how much you earn.</li>
             <li><span class='font-bold'>Issue an invoice and receive money.</span> We send payouts via PayPal.</li>
         </ol>
-
-        <p class='mt-5'>Your affiliate link:</p>
-        <a class='text-base text-black underline hover:no-underline cursor-pointer'>:affiliate_url</a>
-        <p class='mt-1 text-xs'>* Share it with your network to earn a <b>:revenue_percent%</b> commission from every payment from the user.</p>
     ",
 
     "commissions-title" => "Commissions",
     "commissions-no-commissions" => "You don’t have any payments made by your referrals yet",
+
+    "affiliate-link-title" => "Your affiliate link",
+    "affiliate-link-text" => "* Share it with your network to earn a <b>:revenue_percent%</b> commission from every payment from the user.",
+    "Copy to clipboard" => "Copy to clipboard",
+    "Copy link" => "Copy link",
+    "Copied" => "Copied",
 
     "balance-title" => "Your balance",
     "balance-text" => "You can only withdraw funds using PayPal and must issue an invoice.",

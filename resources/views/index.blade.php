@@ -46,6 +46,8 @@
                         <div class="flex flex-col space-y-10">
                             <x-laravel-affiliate-program::info />
 
+                            <x-laravel-affiliate-program::affiliate-link />
+
                             <x-laravel-affiliate-program::commissions :commissions="$commissions" />
 
                             <x-laravel-affiliate-program::balance :balance="$balance" />

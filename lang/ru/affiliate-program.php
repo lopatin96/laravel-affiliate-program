@@ -18,14 +18,16 @@ return [
             <li><span class='font-bold'>Следите за своими конверсиями.</span> Простая информационная панель показывает, сколько вы зарабатываете.</li>
             <li><span class='font-bold'>Выставьте счет-фактуру и получите деньги.</span> Мы осуществляем выплаты через PayPal.</li>
         </ol>
-
-        <p class='mt-5'>Ваша партнерская ссылка:</p>
-        <a class='text-base text-black underline hover:no-underline cursor-pointer'>:affiliate_url</a>
-        <p class='mt-1 text-xs'>* Поделитесь ею со своей аудиторией, чтобы получать комиссию <b>:revenue_percent%</b> с каждого платежа.</p>
     ",
 
     "commissions-title" => "Комиссии",
     "commissions-no-commissions" => "У вас пока нет платежей от ваших рефералов",
+
+    "affiliate-link-title" => "Ваша партнерская ссылка",
+    "affiliate-link-text" => "* Поделитесь ею со своей аудиторией, чтобы получать комиссию <b>:revenue_percent%</b> с каждого платежа.",
+    "Copy to clipboard" => "Скопировать в буфер обмена",
+    "Copy link" => "Копировать ссылку",
+    "Copied" => "Скопировано",
 
     "balance-title" => "Ваш баланс",
     "balance-text" => "Вы можете вывести средства только через PayPal и должны выставить счет.",
