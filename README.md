@@ -9,9 +9,13 @@ Create a ```resources/markdown/affiliate-terms.md``` file with Terms of Service.
 Run a migration ```php artisan migrate```
 
 ### Middlewares
-Add AffiliateProgram middleware to middleware array in ```app/Http/Kernel.php```:
+1. Add AffiliateProgram middleware to middleware array in ```app/Http/Kernel.php```
+2. moved these two lines (```\Illuminate\Session\Middleware\StartSession::class``` and ```\Illuminate\View\Middleware\ShareErrorsFromSession::class```) from ```$middlewareGroups``` to ```$middleware```:
 ```php
 protected $middleware = [
+    …
+    \App\Http\Middleware\EncryptCookies::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
     …
     \Atin\LaravelAffiliateProgram\Http\Middleware\AffiliateProgram::class,
 ];
@@ -44,24 +48,6 @@ use Atin\LaravelAffiliateProgram\Traits\HasAffiliate;
 class User extends Authenticatable
 {
     use HasAffiliate;
-```
-
-### Kernel and Cookie
-In ```app/Http/Kernel.php``` moved these two lines (```\Illuminate\Session\Middleware\StartSession::class``` and ```\Illuminate\View\Middleware\ShareErrorsFromSession::class```) from ```$middlewareGroups``` to ```$middleware```:
-```php
-
-protected $middleware = [
-   …
-    \App\Http\Middleware\TrimStrings::class,
-    \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-    …
-    \Illuminate\Session\Middleware\StartSession::class,
-    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    …
-    \App\Http\Middleware\EncryptCookies::class,
-    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-    …
-];
 ```
 
 ## Nova
