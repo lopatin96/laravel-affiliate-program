@@ -9,14 +9,13 @@ class SaveAffiliateId
 {
     public function handle(Registered $event)
     {
-        if (
-            request()->session()->has('aff_id')
-            && User::findOrFail(request()->session()->get('aff_id'))
-        ) {
-            $event->user->aff_id = request()->session()->get('aff_id');
-            $event->user->save();
+        if (request()->cookie('aff_id')) {
+            if (User::find((int) request()->cookie('aff_id'))) {
+                $event->user->aff_id = request()->cookie('aff_id');
+                $event->user->save();
+            }
 
-            request()->session()->forget('aff_id');
+            cookie()->queue(cookie()->forget('aff_id'));
         }
     }
 }

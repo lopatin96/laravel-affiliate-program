@@ -12,6 +12,6 @@ return [
 
     'payouts_start_at' => 10,
 
-    'cookie_life_in_days' => 30,
+    'cookie_life_in_minutes' => 43200, // 30 days to minutes
 
 ];
