@@ -3,7 +3,7 @@
         type="text"
         value="{{ auth()->user()->affiliate_url }}"
         id="affiliate-link-input"
-        class="mt-2 w-64 rounded border-gray-300 text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        class="mt-2 w-80 rounded border-gray-300 text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         disabled
     >
 
@@ -13,7 +13,10 @@
             onmouseout="outAffiliateFunc()"
             class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none transition ease-in-out duration-150 bg-gray-800"
         >
-            <span class="tooltiptext" id="myTooltip">
+            <span
+                class="tooltiptext"
+                id="affiliateTooltip"
+            >
                 {{ __('laravel-affiliate-program::affiliate-program.Copy to clipboard') }}
             </span>
             {{ __('laravel-affiliate-program::affiliate-program.Copy link') }}
@@ -71,12 +74,12 @@
             copyText.setSelectionRange(0, 100);
             navigator.clipboard.writeText(copyText.value);
 
-            var tooltip = document.getElementById("myTooltip");
+            var tooltip = document.getElementById("affiliateTooltip");
             tooltip.innerHTML = "{{ __('laravel-affiliate-program::affiliate-program.Copied') }}: " + copyText.value;
         }
 
         function outAffiliateFunc() {
-            var tooltip = document.getElementById("myTooltip");
+            var tooltip = document.getElementById("affiliateTooltip");
             tooltip.innerHTML = "{{ __('laravel-affiliate-program::affiliate-program.Copy to clipboard') }}";
         }
     </script>
