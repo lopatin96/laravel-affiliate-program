@@ -1,11 +1,12 @@
 <?php
 
 return [
+    "Affiliate Program | :app_name" => "Affiliate Program | :app_name",
 
     "Affiliate program" => "Affiliate program",
     "Signed in as" => "Signed in as",
     "Managing billing for" => "Managing billing for",
-    "sidebar-text" => "Earn effortlessly with FlexLink's affiliate program. Share your unique link, and start generating income. The more you share, the more you earn.",
+    "sidebar-text" => "Earn effortlessly with :app_name's affiliate program. Share your unique link, and start generating income. The more you share, the more you earn.",
     "Terms of Use" => "Terms of Use",
     "Return to" => "Return to",
 
@@ -14,7 +15,7 @@ return [
         <p>Just a few steps separate you from making money:</p>
 
         <ol class='list-disc list-inside mt-2'>
-            <li><span class='font-bold'>Share your link.</span> Recommend FlexLink to your audience.</li>
+            <li><span class='font-bold'>Share your link.</span> Recommend :app_name to your audience.</li>
             <li><span class='font-bold'>Monitor your conversions.</span> A simple dashboard shows how much you earn.</li>
             <li><span class='font-bold'>Issue an invoice and receive money.</span> We send payouts via PayPal.</li>
         </ol>
@@ -31,7 +32,12 @@ return [
 
     "balance-title" => "Your balance",
     "balance-text" => "You can only withdraw funds using PayPal and must issue an invoice.",
-    "balance-invoice-details" => "Invoice details",
+    "balance-invoice-details" => "
+        <p class='uppercase text-gray-400'>Invoice details</p>
+        <p class='text-lg mt-1'>:invoice_title</p>
+        <p class='text-gray-600'>:invoice_address_1</p>
+        <p class='text-gray-600'>:invoice_address_2</p>
+    ",
     "balance-button-attach-invoice" => "Attach an invoice",
 
     "payouts-title" => "Payouts",

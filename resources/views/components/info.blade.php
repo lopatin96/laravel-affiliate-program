@@ -7,7 +7,7 @@
         <div>
             <div class="px-6 py-4 bg-gray-200 border border-gray-300 sm:rounded-lg shadow-sm">
                 <div class="max-w-3xl text-sm text-gray-600">
-                    {!! __('laravel-affiliate-program::affiliate-program.info-text') !!}
+                    {!! __('laravel-affiliate-program::affiliate-program.info-text', ['app_name' => config('app.name')]) !!}
                 </div>
             </div>
         </div>

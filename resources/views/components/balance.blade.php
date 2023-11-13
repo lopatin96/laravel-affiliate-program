@@ -15,12 +15,7 @@
             </div>
             <div class="flex justify-between items-center px-6 py-4 bg-gray-100 bg-opacity-50 border-t border-gray-100">
                 <div class="text-sm">
-                    <p class="uppercase text-gray-400">
-                        {{ __('laravel-affiliate-program::affiliate-program.balance-invoice-details') }}
-                    </p>
-                    <p class="text-lg mt-1">FlexLink Sp. z o.o.</p>
-                    <p class="text-gray-600">05-090 Warsaw</p>
-                    <p class="text-gray-600">ul. Jaworskiego 9</p>
+                    {!! __('laravel-affiliate-program::affiliate-program.balance-invoice-details', ['invoice_title' => config('laravel-affiliate-program.invoice_title'), 'invoice_address_1' => config('laravel-affiliate-program.invoice_address_1'), 'invoice_address_2' => config('laravel-affiliate-program.invoice_address_2')])  !!}
 {{--                    <p class="text-gray-600">VAT number: PL6961899269</p>--}}
                 </div>
 

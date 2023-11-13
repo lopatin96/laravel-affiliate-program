@@ -3,7 +3,7 @@
         type="text"
         value="{{ auth()->user()->affiliate_url }}"
         id="affiliate-link-input"
-        class="mt-2 w-80 rounded border-gray-300 text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        class="mt-2 w-96 rounded border-gray-300 text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         disabled
     >
 
@@ -11,7 +11,7 @@
         <button
             onclick="affiliateFunc()"
             onmouseout="outAffiliateFunc()"
-            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none transition ease-in-out duration-150 bg-gray-800"
+            class="mt-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest focus:outline-none transition ease-in-out duration-150 bg-gray-800"
         >
             <span
                 class="tooltiptext"

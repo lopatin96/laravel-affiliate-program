@@ -14,4 +14,10 @@ return [
 
     'cookie_life_in_minutes' => 43200, // 30 days to minutes
 
+    'invoice_title' => '',
+
+    'invoice_address_1' => '',
+
+    'invoice_address_2' => '',
+
 ];
