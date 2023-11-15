@@ -11,16 +11,52 @@ use Spark\Events\SubscriptionUpdated;
 
 class SparkAffiliateSubscriptionUpdate
 {
-    public function handle($event)
+    public function handleSubscriptionCreated($event): void
     {
-        if ($affiliate = $event->subscription->user->affiliate) {
-            AffiliateCommission::create([
-                'user_id' => $affiliate->id,
-                'subscription_user_id' => $event->subscription->user_id,
-                'payment' => $this->getPriceInCents($event->subscription->stripe_price),
-                'revenue_percent' => config('laravel-affiliate-program.revenue_percent'),
-            ]);
+        $this->handlePaymentSucceeded($event);
+    }
+
+    public function handleSubscriptionUpdated($event): void
+    {
+        $affiliate = $event->subscription->user->affiliate;
+
+        if (is_null($affiliate)) {
+            return;
         }
+
+        $affiliateCommission = AffiliateCommission::where('user_id', $affiliate->id)
+            ->where('subscription_user_id', $event->subscription->user_id)
+            ->latest()
+            ->first();
+
+        if (is_null($affiliateCommission)) {
+            return;
+        }
+
+        $affiliateCommission->update([
+            'payment' => $this->getPriceInCents($event->subscription->stripe_price),
+            'revenue_percent' => config('laravel-affiliate-program.revenue_percent'),
+        ]);
+    }
+
+    public function handlePaymentSucceeded($event)
+    {
+        $affiliate = $event->subscription->user->affiliate;
+
+        if (is_null($affiliate)) {
+            return;
+        }
+
+        if ($event->subscription->stripe_status !== 'active') {
+            return;
+        }
+
+        AffiliateCommission::create([
+            'user_id' => $affiliate->id,
+            'subscription_user_id' => $event->subscription->user_id,
+            'payment' => $this->getPriceInCents($event->subscription->stripe_price),
+            'revenue_percent' => config('laravel-affiliate-program.revenue_percent'),
+        ]);
     }
 
     private function getPriceInCents(string $stripePrice): int
@@ -38,13 +74,13 @@ class SparkAffiliateSubscriptionUpdate
         return -1;
     }
 
-    public function subscribe($events)
+    public function subscribe($events): array
     {
         return [
-            PaymentSucceeded::class => 'handle',
-            SubscriptionCreated::class => 'handle',
-            SubscriptionUpdated::class => 'handle',
-            SubscriptionCancelled::class => 'handle',
+            SubscriptionCreated::class => 'handleSubscriptionCreated',
+            SubscriptionUpdated::class => 'handleSubscriptionUpdated',
+//            SubscriptionCancelled::class => 'handleSubscriptionCancelled',
+            PaymentSucceeded::class => 'handlePaymentSucceeded',
         ];
     }
 }
