@@ -51,6 +51,19 @@ class User extends Authenticatable
 ```
 
 ## Nova
+Add ```NewAffiliateCommissions``` and ```NewAffiliateInvoices``` to ```app/Nova/Dashboards/Main.php```
+```php
+public function cards()
+{
+    return [
+        …
+        new NewAffiliateCommissions,
+        new NewAffiliateInvoices,
+        …
+    ];
+}
+```
+
 ### NovaServiceProvider
 ```php
 MenuSection::make('Affiliate Program', [
@@ -64,6 +77,194 @@ MenuSection::make('Affiliate Program', [
     ->icon('user-group'),
 ```
 
+### Metrics
+#### AffiliateCommissionsPerDay
+```php
+<?php
+
+namespace App\Nova\Metrics;
+
+use Atin\LaravelAffiliateProgram\Models\AffiliateCommission;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Trend;
+
+class AffiliateCommissionsPerDay extends Trend
+{
+    public $width = '1/4';
+
+    public function calculate(NovaRequest $request): \Laravel\Nova\Metrics\TrendResult
+    {
+        return $this->countByDays($request, AffiliateCommission::class);
+    }
+
+    public function ranges(): array
+    {
+        return [
+            30 => __('30 Days'),
+            60 => __('60 Days'),
+            90 => __('90 Days'),
+        ];
+    }
+
+    public function cacheFor(): \DateInterval|float|\DateTimeInterface|\Illuminate\Support\Carbon|int|null
+    {
+        return now()->addMinute();
+    }
+}
+```
+
+#### AffiliateInvoicesPerDay
+```php
+<?php
+
+namespace App\Nova\Metrics;
+
+use Atin\LaravelAffiliateProgram\Models\AffiliateInvoice;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Trend;
+
+class AffiliateInvoicesPerDay extends Trend
+{
+    public $width = '1/4';
+
+    public function calculate(NovaRequest $request): \Laravel\Nova\Metrics\TrendResult
+    {
+        return $this->countByDays($request, AffiliateInvoice::class);
+    }
+
+    public function ranges(): array
+    {
+        return [
+            30 => __('30 Days'),
+            60 => __('60 Days'),
+            90 => __('90 Days'),
+        ];
+    }
+
+    public function cacheFor(): \DateInterval|float|\DateTimeInterface|\Illuminate\Support\Carbon|int|null
+    {
+        return now()->addMinute();
+    }
+}
+```
+
+#### AffiliatePayoutsPerDay
+```php
+<?php
+
+namespace App\Nova\Metrics;
+
+use Atin\LaravelAffiliateProgram\Models\AffiliatePayout;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Trend;
+
+class AffiliatePayoutsPerDay extends Trend
+{
+    public $width = '1/4';
+
+    public function calculate(NovaRequest $request): \Laravel\Nova\Metrics\TrendResult
+    {
+        return $this->countByDays($request, AffiliatePayout::class);
+    }
+
+    public function ranges(): array
+    {
+        return [
+            30 => __('30 Days'),
+            60 => __('60 Days'),
+            90 => __('90 Days'),
+        ];
+    }
+
+    public function cacheFor(): \DateInterval|float|\DateTimeInterface|\Illuminate\Support\Carbon|int|null
+    {
+        return now()->addMinute();
+    }
+}
+```
+
+#### NewAffiliateCommissions
+```php
+<?php
+
+namespace App\Nova\Metrics;
+
+use Atin\LaravelAffiliateProgram\Models\AffiliateCommission;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Value;
+
+class NewAffiliateCommissions extends Value
+{
+    public $width = '1/4';
+
+    public function calculate(NovaRequest $request): \Laravel\Nova\Metrics\ValueResult
+    {
+        return $this->count($request, AffiliateCommission::class);
+    }
+
+    public function ranges(): array
+    {
+        return [
+            'TODAY' => __('Today'),
+            'YESTERDAY' => __('Yesterday'),
+            7 => __('7 Days'),
+            30 => __('30 Days'),
+            60 => __('60 Days'),
+            365 => __('365 Days'),
+            'MTD' => __('Month To Date'),
+            'QTD' => __('Quarter To Date'),
+            'YTD' => __('Year To Date'),
+        ];
+    }
+
+    public function cacheFor(): \DateInterval|float|\DateTimeInterface|\Illuminate\Support\Carbon|int|null
+    {
+        return now()->addMinute();
+    }
+}
+```
+
+#### NewAffiliateInvoices
+```php
+<?php
+
+namespace App\Nova\Metrics;
+
+use Atin\LaravelAffiliateProgram\Models\AffiliateInvoice;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Value;
+
+class NewAffiliateInvoices extends Value
+{
+    public $width = '1/4';
+
+    public function calculate(NovaRequest $request): \Laravel\Nova\Metrics\ValueResult
+    {
+        return $this->count($request, AffiliateInvoice::class);
+    }
+
+    public function ranges(): array
+    {
+        return [
+            'TODAY' => __('Today'),
+            'YESTERDAY' => __('Yesterday'),
+            7 => __('7 Days'),
+            30 => __('30 Days'),
+            60 => __('60 Days'),
+            365 => __('365 Days'),
+            'MTD' => __('Month To Date'),
+            'QTD' => __('Quarter To Date'),
+            'YTD' => __('Year To Date'),
+        ];
+    }
+
+    public function cacheFor(): \DateInterval|float|\DateTimeInterface|\Illuminate\Support\Carbon|int|null
+    {
+        return now()->addMinute();
+    }
+}
+```
+
 ### Resources
 #### AffiliateCommission
 ```php
@@ -71,14 +272,18 @@ MenuSection::make('Affiliate Program', [
 
 namespace App\Nova;
 
+use App\Nova\Metrics\AffiliateCommissionsPerDay;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Line;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Marshmallow\Filters\DateRangeFilter;
 
 class AffiliateCommission extends Resource
 {
@@ -91,7 +296,8 @@ class AffiliateCommission extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable()->hideFromIndex(),
+            ID::make()
+                ->sortable(),
 
             Stack::make('User', [
                 BelongsTo::make('User')
@@ -130,18 +336,31 @@ class AffiliateCommission extends Resource
             Number::make('Revenue Percent')
                 ->sortable()
                 ->readonly(),
+
+            Stack::make('Created At', [
+                DateTime::make('Created At'),
+
+                Line::make(null, function () {
+                    return "({$this->created_at->diffForHumans()})";
+                })
+                    ->asSmall(),
+            ])
+                ->sortable()
+                ->readonly(),
         ];
     }
 
     public function cards(NovaRequest $request)
     {
         return [
+            new AffiliateCommissionsPerDay,
         ];
     }
 
     public function filters(NovaRequest $request)
     {
         return [
+            new DateRangeFilter('created_at', 'Created Date'),
         ];
     }
 
@@ -163,12 +382,18 @@ class AffiliateCommission extends Resource
 
 namespace App\Nova;
 
+use App\Nova\Metrics\AffiliateInvoicesPerDay;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Line;
 use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Marshmallow\Filters\DateRangeFilter;
 
 class AffiliateInvoice extends Resource
 {
@@ -177,6 +402,8 @@ class AffiliateInvoice extends Resource
     public static $search = [
         'id',
     ];
+
+    public static $with = ['affiliatePayout'];
 
     public function fields(NovaRequest $request)
     {
@@ -207,18 +434,36 @@ class AffiliateInvoice extends Resource
                     ->asHtml(),
             ])
                 ->sortable(),
+
+            HasOne::make('AffiliatePayout'),
+
+            Boolean::make('Paid', 'affiliatePayout')
+                ->sortable(),
+
+            Stack::make('Created At', [
+                DateTime::make('Created At'),
+
+                Line::make(null, function () {
+                    return "({$this->created_at->diffForHumans()})";
+                })
+                    ->asSmall(),
+            ])
+                ->sortable()
+                ->readonly(),
         ];
     }
 
     public function cards(NovaRequest $request)
     {
         return [
+            new AffiliateInvoicesPerDay,
         ];
     }
 
     public function filters(NovaRequest $request)
     {
         return [
+            new DateRangeFilter('created_at', 'Created Date'),
         ];
     }
 
@@ -229,7 +474,7 @@ class AffiliateInvoice extends Resource
 
     public function authorizedToDelete(Request $request)
     {
-        return false;
+        return is_null($this->affiliatePayout);
     }
 }
 ```
@@ -240,12 +485,17 @@ class AffiliateInvoice extends Resource
 
 namespace App\Nova;
 
-use Atin\LaravelAffiliateProgram\Models\AffiliateInvoice;
+use App\Nova\Metrics\AffiliateCommissionsPerDay;
+use App\Nova\Metrics\AffiliatePayoutsPerDay;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Line;
+use Laravel\Nova\Fields\Stack;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Marshmallow\Filters\DateRangeFilter;
 
 class AffiliatePayout extends Resource
 {
@@ -258,7 +508,8 @@ class AffiliatePayout extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable()->hideFromIndex(),
+            ID::make()
+                ->sortable(),
 
             BelongsTo::make('Affiliate Invoice')
                 ->peekable(),
@@ -267,18 +518,30 @@ class AffiliatePayout extends Resource
                 ->asMinorUnits()
                 ->sortable(),
 
+            Stack::make('Created At', [
+                DateTime::make('Created At'),
+
+                Line::make(null, function () {
+                    return "({$this->created_at->diffForHumans()})";
+                })
+                    ->asSmall(),
+            ])
+                ->sortable()
+                ->readonly(),
         ];
     }
 
     public function cards(NovaRequest $request)
     {
         return [
+            new AffiliatePayoutsPerDay,
         ];
     }
 
     public function filters(NovaRequest $request)
     {
         return [
+            new DateRangeFilter('created_at', 'Created Date'),
         ];
     }
 
