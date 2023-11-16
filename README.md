@@ -405,6 +405,11 @@ class AffiliateInvoice extends Resource
 
     public static $with = ['affiliatePayout'];
 
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return $query->doesntHave('AffiliatePayout');
+    }
+
     public function fields(NovaRequest $request)
     {
         return [
