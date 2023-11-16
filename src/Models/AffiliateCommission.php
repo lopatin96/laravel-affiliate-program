@@ -6,10 +6,11 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Atin\LaravelNovaBadges\Traits\HasNovaBadges;
 
 class AffiliateCommission extends Model
 {
-    use HasFactory;
+    use HasNovaBadges, HasFactory;
 
     protected $fillable = [
         'user_id',

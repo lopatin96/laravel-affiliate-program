@@ -2,13 +2,13 @@
 
 namespace Atin\LaravelAffiliateProgram\Models;
 
-use Atin\LaravelAffiliateProgram\Models\AffiliateInvoice;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Atin\LaravelNovaBadges\Traits\HasNovaBadges;
 
 class AffiliatePayout extends Model
 {
-    use HasFactory;
+    use HasNovaBadges, HasFactory;
 
     protected $fillable = [
         'affiliate_invoice_id',
