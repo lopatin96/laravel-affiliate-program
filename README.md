@@ -8,6 +8,21 @@ Create a ```resources/markdown/affiliate-terms.md``` file with Terms of Service.
 ### Migrations
 Run a migration ```php artisan migrate```
 
+
+### Directive
+Add a blade directive to ```app/Providers/AppServiceProvider.php```
+```php
+use Illuminate\Support\Facades\Blade;
+
+public function boot()
+{
+    …
+    Blade::directive('money', static function ($amountInCents, $decimals = 2) {
+        return "<?php echo '$' . number_format($amountInCents / 100, $decimals); ?>";
+    });
+}
+```
+
 ### Middlewares
 1. Add AffiliateProgram middleware to middleware array in ```app/Http/Kernel.php```
 2. moved these two lines (```\Illuminate\Session\Middleware\StartSession::class``` and ```\Illuminate\View\Middleware\ShareErrorsFromSession::class```) from ```$middlewareGroups``` to ```$middleware```:

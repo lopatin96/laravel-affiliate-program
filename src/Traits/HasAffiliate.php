@@ -2,13 +2,10 @@
 
 namespace Atin\LaravelAffiliateProgram\Traits;
 
-use App\Models\Click;
-use App\Models\Link;
 use App\Models\User;
 use Atin\LaravelAffiliateProgram\Models\AffiliateCommission;
 use Atin\LaravelAffiliateProgram\Models\AffiliateInvoice;
 use Atin\LaravelAffiliateProgram\Models\AffiliatePayout;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
