@@ -19,9 +19,9 @@
                 <tr class="border-b">
                     <td class="px-4 py-3">{{ $commission->subscriptionUser->name }}</td>
                     <td class="px-4 py-3">{{ $commission->created_at->diffForHumans() }}</td>
-                    <td class="px-4 py-3">@money($commission->payment)</td>
-                    <td class="px-4 py-3">@money($commission->commission)</td>
-                    <td class="px-4 py-3">@money($commission->payout)</td>
+                    <td class="px-4 py-3">{{ '$' . number_format($commission->payment / 100, 2) }}</td>
+                    <td class="px-4 py-3">{{ '$' . number_format($commission->commission / 100, 2) }}</td>
+                    <td class="px-4 py-3">{{ '$' . number_format($commission->payout / 100, 2) }}</td>
                 </tr>
             @endforeach
             </tbody>

@@ -15,7 +15,7 @@
                 @foreach($payouts as $payout)
                     <tr class="border-b">
                         <td class="px-4 py-3">{{ $payout->created_at->diffForHumans() }}</td>
-                        <td class="px-4 py-3">@money($payout->amount)</td>
+                        <td class="px-4 py-3">{{ '$' . number_format($commission->amount / 100, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>
